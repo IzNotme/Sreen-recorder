@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iznot-ss - Free Screen Recorder</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%23ff6b6b'/><circle cx='50' cy='50' r='25' fill='white'/></svg>">
+</head>
+<body>
+  <!-- Landing Page -->
+  <div id="landing" class="page active">
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <div class="logo-icon">📹</div>
+          <h1>iznot-ss</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+          <span class="sun">☀️</span>
+          <span class="moon">🌙</span>
+        </button>
+      </header>
+
+      <main class="landing-main">
+        <div class="hero">
+          <h2 class="hero-title">Record your screen in seconds</h2>
+          <p class="hero-subtitle">No account needed. No watermarks. Instant downloads.</p>
+          <button class="cta-button" id="startBtn">
+            <span>🎥 Start Recording</span>
+          </button>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">🖥️</div>
+            <h3>Screen + Audio</h3>
+            <p>Record screen, mic, and system audio</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📱</div>
+            <h3>Any Device</h3>
+            <p>Works on desktop & mobile browsers</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Lightning Fast</h3>
+            <p>Record, trim, download instantly</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Recorder Controls -->
+  <div id="recorder" class="page">
+    <div class="container">
+      <div class="recorder-header">
+        <div class="status">
+          <div class="status-indicator" id="statusIndicator"></div>
+          <span id="statusText">Ready to record</span>
+          <span id="timer" class="timer">00:00:00</span>
+        </div>
+        <div class="controls">
+          <button class="control-btn pause-btn" id="pauseBtn" title="Pause">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16" rx="1"/>
+              <rect x="14" y="4" width="4" height="16" rx="1"/>
+            </svg>
+          </button>
+          <button class="control-btn stop-btn" id="stopBtn" title="Stop">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="option-group">
+          <label class="option">
+            <input type="radio" name="screenType" value="screen" id="screenRadio" checked>
+            <span class="option-label">
+              <div class="option-icon">🖥️</div>
+              Entire Screen
+            </span>
+          </label>
+          <label class="option">
+            <input type="radio" name="screenType" value="window" id="windowRadio">
+            <span class="option-label">
+              <div class="option-icon">🪟</div>
+              Window
+            </span>
+          </label>
+          <label class="option">
+            <input type="radio" name="screenType" value="tab" id="tabRadio">
+            <span class="option-label">
+              <div class="option-icon">📄</div>
+              Tab
+            </span>
+          </label>
+        </div>
+
+        <div class="option-group">
+          <label class="toggle-option">
+            <input type="checkbox" id="micToggle">
+            <span class="toggle-label">
+              <div class="toggle-icon">🎤</div>
+              Microphone
+            </span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" id="webcamToggle">
+            <span class="toggle-label">
+              <div class="toggle-icon">📹</div>
+              Webcam Overlay
+            </span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" id="systemAudioToggle">
+            <span class="toggle-label">
+              <div class="toggle-icon">🔊</div>
+              Device Sound
+            </span>
+            <span class="toggle-hint" id="systemAudioHint"></span>
+          </label>
+        </div>
+      </div>
+
+      <button class="record-btn" id="recordBtn">
+        <span class="record-icon">●</span>
+        <span id="recordBtnText">Start Recording</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Preview & Download -->
+  <div id="preview" class="page">
+    <div class="container">
+      <div class="preview-header">
+        <h2>Recording Complete!</h2>
+        <p>Preview your recording below</p>
+      </div>
+
+      <div class="preview-video-container">
+        <video id="previewVideo" controls class="preview-video" playsinline></video>
+        <div class="video-overlay">
+          <button class="download-btn" id="downloadBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download MP4
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-actions">
+        <button class="secondary-btn" id="newRecordingBtn">New Recording</button>
+        <button class="secondary-btn" id="trimBtn">✂️ Trim Video</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trim Modal -->
+  <div id="trimModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Trim Video</h3>
+        <button class="close-btn" id="closeTrim">&times;</button>
+      </div>
+      <video id="trimVideo" class="trim-video"></video>
+      <div class="trim-controls">
+        <input type="range" id="trimStart" class="trim-slider" min="0" max="100" value="0">
+        <input type="range" id="trimEnd" class="trim-slider" min="0" max="100" value="100">
+        <div class="trim-time">
+          <span id="trimStartTime">00:00</span>
+          <span id="trimEndTime">00:00</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="cancelTrim">Cancel</button>
+        <button class="primary-btn" id="applyTrim">Apply Trim</button>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="script.js"></script>
+</html>
